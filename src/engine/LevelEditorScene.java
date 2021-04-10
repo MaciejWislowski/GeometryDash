@@ -1,5 +1,7 @@
 package engine;
 
+import utility.Constants;
+
 import java.awt.*;
 
 public class LevelEditorScene extends Scene{
@@ -20,6 +22,8 @@ public class LevelEditorScene extends Scene{
 
     @Override
     public void draw(Graphics2D g2) {
+        g2.setColor(Color.BLUE);
+        g2.fillRect(0,0, Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 
     }
 }

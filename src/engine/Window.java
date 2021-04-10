@@ -1,8 +1,10 @@
 package engine;
 
+import utility.Constants;
 import utility.Time;
 
 import javax.swing.JFrame;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 
@@ -13,14 +15,15 @@ public class Window extends JFrame implements Runnable {
 
     private static Window window = null;
     private boolean isRunning = true;
-
     private Scene currentScene = null;
+    private Image doubleBufferImage = null;
+    private Graphics doubleBufferGraphics = null;
 
     public Window() {
         this.mouseListener = new ML();
         this.keyListener = new KL();
-        this.setSize(1280,720);
-        this.setTitle("Geometry Dash");
+        this.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
+        this.setTitle(Constants.SCREEN_TITLE);
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +59,22 @@ public class Window extends JFrame implements Runnable {
 
     public void update(double dt) {
         currentScene.update(dt);
+        draw(getGraphics());
+    }
+
+    public void draw(Graphics g) {
+        if(doubleBufferImage == null) {
+            doubleBufferImage = createImage(getWidth(),getHeight());
+            doubleBufferGraphics = doubleBufferImage.getGraphics();
+        }
+        renderOffscreen(doubleBufferGraphics);
+
+        g.drawImage(doubleBufferImage, 0, 0, getWidth(), getHeight(), null);
+    }
+
+    public void renderOffscreen(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        currentScene.draw(g2);
     }
 
     public void run() {
