@@ -1,4 +1,4 @@
-package engine;
+package com.engine;
 
 import java.awt.*;
 
@@ -7,6 +7,7 @@ public abstract class Scene {
 
     public void Scene(String name) {
         this.name = name;
+        init();
     }
 
     public abstract void init();

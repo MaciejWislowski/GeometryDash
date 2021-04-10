@@ -1,4 +1,4 @@
-package utility;
+package com.utility;
 
 public class Time {
     public static double timeStarted = System.nanoTime();

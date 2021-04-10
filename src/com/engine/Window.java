@@ -1,12 +1,10 @@
-package engine;
+package com.engine;
 
-import utility.Constants;
-import utility.Time;
+import com.utility.Constants;
+import com.utility.Time;
 
 import javax.swing.JFrame;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
 
 public class Window extends JFrame implements Runnable {
 
