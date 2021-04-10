@@ -31,7 +31,12 @@ public class Sprite extends Component {
             e.printStackTrace();
             System.exit(-1);
         }
+    }
 
+    public Sprite(BufferedImage image) {
+        this.image = image;
+        this.width = image.getWidth();
+        this.height = image.getHeight();
     }
 
     @Override

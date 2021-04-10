@@ -2,6 +2,10 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.06 - Spritesheets
+- added classes: Spritesheet;
+- added possibilities to divide spritesheets on small sprites;
+
 Update 0.05 - Asset Pool
 - added classes: Sprite, AssetPool;
 - added possibility to add sprites to game;
