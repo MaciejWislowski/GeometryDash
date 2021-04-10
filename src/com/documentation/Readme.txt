@@ -2,6 +2,10 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.05 - Asset Pool
+- added classes: Sprite, AssetPool;
+- added possibility to add sprites to game;
+
 Update 0.04 - The Component Pattern
 - added classes: Transform, BoxBounds, Component, Game Object, Vector2;
 - implemented Entity component system
