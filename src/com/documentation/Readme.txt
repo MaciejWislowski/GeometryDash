@@ -2,6 +2,14 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.08 - Camera and Rendering
+- add classes: Camera, Renderer;
+- set object rendering and camera
+
+Update 0.07 - Transformations
+- added classes: Player;
+- implement transformation display methods;
+
 Update 0.06 - Spritesheets
 - added classes: Spritesheet;
 - added possibilities to divide spritesheets on small sprites;
