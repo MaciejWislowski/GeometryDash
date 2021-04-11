@@ -12,7 +12,10 @@ public class Window extends JFrame implements Runnable {
     public KL keyListener;
 
     private static Window window = null;
+
     private boolean isRunning = true;
+    public boolean isInEditor = true;
+
     private Scene currentScene = null;
     private Image doubleBufferImage = null;
     private Graphics doubleBufferGraphics = null;
@@ -35,10 +38,19 @@ public class Window extends JFrame implements Runnable {
         changeScene(0);
     }
 
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
+
     public void changeScene(int scene) {
         switch (scene) {
             case 0:
-                currentScene = LevelEditorScene.getScene();
+                currentScene = new LevelEditorScene("Level Editor");
+                isInEditor = true;
+                break;
+            case 1:
+                isInEditor = false;
+                currentScene = new LevelScene("Level");
                 break;
             default:
                 System.out.println("Unknown scene");

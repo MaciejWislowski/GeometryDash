@@ -1,11 +1,10 @@
 package com.component;
 
+import com.engine.*;
 import com.engine.Component;
-import com.engine.GameObject;
-import com.engine.LevelEditorScene;
+import com.engine.Window;
 import com.utility.Constants;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Ground extends Component {
@@ -13,10 +12,19 @@ public class Ground extends Component {
 
 
     public void update(double dt) {
-        GameObject player = LevelEditorScene.getScene().player;
-        if(player.transform.position.y + player.getComponent(BoxBounds.class).height > gameObject.transform.position.y)
-            player.transform.position.y = gameObject.transform.position.y - player.getComponent(BoxBounds.class).height;
+        if (!Window.getWindow().isInEditor) {
+
+            LevelScene scene = (LevelScene) Window.getWindow().getCurrentScene();
+            GameObject player = scene.player;
+            if (player.transform.position.y + player.getComponent(BoxBounds.class).height > gameObject.transform.position.y) {
+                player.transform.position.y = gameObject.transform.position.y - player.getComponent(BoxBounds.class).height;
+            }
+            gameObject.transform.position.x = scene.camera.position.x;
+        } else {
+            gameObject.transform.position.x = Window.getWindow().getCurrentScene().camera.position.x - 10;
+        }
     }
+
 
     public void draw(Graphics2D g2) {
         g2.setColor(Color.BLACK);

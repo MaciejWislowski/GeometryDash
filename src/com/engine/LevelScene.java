@@ -1,21 +1,22 @@
 package com.engine;
 
 import com.component.*;
-import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
 import com.utility.Constants;
 import com.utility.Vector2;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
-public class LevelEditorScene extends Scene {
+public class LevelScene extends Scene {
 
     public GameObject player;
 
-    public LevelEditorScene(String name) {
+    KL keyListener;
+
+    public LevelScene(String name) {
         super.Scene(name);
     }
+
 
     @Override
     public void init() {
@@ -25,6 +26,8 @@ public class LevelEditorScene extends Scene {
         Spritesheet layerThree = new Spritesheet("assets/player/layerThree.png", 42,42,2,13,13*5);
         Player playerComp = new Player(layerOne.sprites.get(0),layerTwo.sprites.get(0),layerThree.sprites.get(0), Color.RED, Color.GRAY);
         player.addComponent(playerComp);
+        player.addComponent(new Rigidbody(new Vector2(395,0)));
+        player.addComponent(new BoxBounds(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT));
 
         GameObject ground;
         ground = new GameObject("Ground",new Transform(new Vector2(0,Constants.GROUND_Y)));
