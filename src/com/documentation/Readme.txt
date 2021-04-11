@@ -2,6 +2,10 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.09 - Coding Gravity
+- add classess: Ground, RigidBody;
+- add gravity;
+
 Update 0.08 - Camera and Rendering
 - add classes: Camera, Renderer;
 - set object rendering and camera

@@ -38,7 +38,7 @@ public class Window extends JFrame implements Runnable {
     public void changeScene(int scene) {
         switch (scene) {
             case 0:
-                currentScene = new LevelEditorScene("Level Editor",keyListener);
+                currentScene = LevelEditorScene.getScene();
                 break;
             default:
                 System.out.println("Unknown scene");
