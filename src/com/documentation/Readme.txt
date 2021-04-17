@@ -2,6 +2,10 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.12 - Placing Blocks
+- add classess: SnapToGrid
+- now we can put new blocks in chosen grid tile :)
+
 Update 0.11 - Starting UI/Camera Controls
 - add classess: CameraControls and Grid;
 - add visible grid;

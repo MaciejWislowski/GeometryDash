@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 public class Sprite extends Component {
 
@@ -42,6 +41,10 @@ public class Sprite extends Component {
     @Override
     public void draw(Graphics2D g2) {
         g2.drawImage(image, (int)gameObject.transform.position.x, (int)gameObject.transform.position.y, width, height, null);
+    }
+
+    public Component copy() {
+        return new Sprite(this.image);
     }
 
 }

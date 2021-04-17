@@ -46,4 +46,8 @@ public class Grid extends Component {
         }
 
     }
+
+    public Component copy() {
+        return null;
+    }
 }

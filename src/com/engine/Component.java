@@ -13,4 +13,6 @@ public abstract class Component<T> {
     public void draw(Graphics2D gw) {
         return;
     }
+
+    public abstract Component copy();
 }

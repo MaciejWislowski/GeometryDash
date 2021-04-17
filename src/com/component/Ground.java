@@ -30,4 +30,8 @@ public class Ground extends Component {
         g2.setColor(Color.BLACK);
         g2.drawRect((int)gameObject.transform.position.x - 10, (int)gameObject.transform.position.y, Constants.SCREEN_WIDTH + 20, Constants.SCREEN_HEIGHT);
     }
+
+    public Component copy() {
+        return null;
+    }
 }

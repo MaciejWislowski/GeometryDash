@@ -22,4 +22,8 @@ public class Rigidbody extends Component {
             velocity.y = Math.signum(velocity.y) * Constants.TERMINAL_VELOCITY;
         }
     }
+
+    public Component copy() {
+        return null;
+    }
 }

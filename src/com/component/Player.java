@@ -52,4 +52,8 @@ public class Player extends Component {
         g2.drawImage(layerTwo.image,transform,null);
         g2.drawImage(layerThree.image,transform,null);
     }
+
+    public Component copy() {
+        return null;
+    }
 }

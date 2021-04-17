@@ -17,4 +17,8 @@ public class BoxBounds extends Component {
 
     }
 
+    public Component copy() {
+        return new BoxBounds(width,height);
+    }
+
 }
