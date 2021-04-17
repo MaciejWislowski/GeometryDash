@@ -32,7 +32,7 @@ public class Grid extends Component {
         float bottom = Math.min(Constants.GROUND_Y - camera.position.y, Constants.SCREEN_HEIGHT);
 
         float startX = (float)Math.floor(camera.position.x / gridWidth)*gridWidth - camera.position.x;
-        float startY = (float)Math.floor(camera.position.y / gridHeight)*gridHeight - camera.position.y;;
+        float startY = (float)Math.floor(camera.position.y / gridHeight)*gridHeight - camera.position.y;
 
         for(int column = 0; column <= numYLines; column++) {
             g2.draw(new Line2D.Float(startX, 0, startX, bottom));
