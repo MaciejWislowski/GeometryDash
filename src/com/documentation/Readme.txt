@@ -2,6 +2,15 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.11 - Starting UI/Camera Controls
+- add classess: CameraControls and Grid;
+- add visible grid;
+- add possibility to move in Level editor using mouse roll;
+
+Update 0.10 - Maintenance
+- add classess: LevelScene;
+- code maintenance;
+
 Update 0.09 - Coding Gravity
 - add classess: Ground, RigidBody;
 - add gravity;
