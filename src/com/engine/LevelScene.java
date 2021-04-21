@@ -1,6 +1,7 @@
 package com.engine;
 
 import com.component.*;
+import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
 import com.utility.Constants;
 import com.utility.Vector2;
@@ -20,10 +21,12 @@ public class LevelScene extends Scene {
 
     @Override
     public void init() {
+        initAssetPool();
+
         player = new GameObject("Test",new Transform(new Vector2(300.0f,400.0f)));
-        Spritesheet layerOne = new Spritesheet("assets/player/layerOne.png", 42,42,2,13,13*5);
-        Spritesheet layerTwo = new Spritesheet("assets/player/layerTwo.png", 42,42,2,13,13*5);
-        Spritesheet layerThree = new Spritesheet("assets/player/layerThree.png", 42,42,2,13,13*5);
+        Spritesheet layerOne = AssetPool.getSpritesheet("assets/player/layerOne.png");
+        Spritesheet layerTwo = AssetPool.getSpritesheet("assets/player/layerTwo.png");
+        Spritesheet layerThree = AssetPool.getSpritesheet("assets/player/layerThree.png");
         Player playerComp = new Player(layerOne.sprites.get(0),layerTwo.sprites.get(0),layerThree.sprites.get(0), Color.RED, Color.GRAY);
         player.addComponent(playerComp);
         player.addComponent(new Rigidbody(new Vector2(395,0)));
@@ -36,6 +39,13 @@ public class LevelScene extends Scene {
         addGameObject(player);
         addGameObject(ground);
 
+    }
+
+    public void initAssetPool() {
+        AssetPool.addSpritesheet("assets/player/layerOne.png", 42,42,2,13,13*5);
+        AssetPool.addSpritesheet("assets/player/layerTwo.png", 42,42,2,13,13*5);
+        AssetPool.addSpritesheet("assets/player/layerThree.png", 42,42,2,13,13*5);
+        AssetPool.addSpritesheet("assets/groundSprites.png", Constants.TILE_WIDTH, Constants.TILE_HEIGHT, 2, 6, 12);
     }
 
     @Override

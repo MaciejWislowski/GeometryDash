@@ -1,12 +1,18 @@
 package com.engine;
 
 import com.component.*;
+import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
 import com.ui.MainContainer;
 import com.utility.Constants;
 import com.utility.Vector2;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class LevelEditorScene extends Scene {
 
@@ -14,7 +20,7 @@ public class LevelEditorScene extends Scene {
     private Grid grid;
     private CameraControls cameraControls;
     public GameObject mouseCursor;
-    private MainContainer editingButtons = new MainContainer();
+    private MainContainer editingButtons;
 
     public LevelEditorScene(String name) {
         super.Scene(name);
@@ -23,6 +29,9 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        initAssetPool();
+        editingButtons = new MainContainer();
+
         grid = new Grid();
         cameraControls = new CameraControls();
         editingButtons.start();
@@ -31,9 +40,9 @@ public class LevelEditorScene extends Scene {
         mouseCursor.addComponent(new SnapToGrid(Constants.TILE_WIDTH,Constants.TILE_HEIGHT));
 
         player = new GameObject("Test",new Transform(new Vector2(300.0f,400.0f)));
-        Spritesheet layerOne = new Spritesheet("assets/player/layerOne.png", 42,42,2,13,13*5);
-        Spritesheet layerTwo = new Spritesheet("assets/player/layerTwo.png", 42,42,2,13,13*5);
-        Spritesheet layerThree = new Spritesheet("assets/player/layerThree.png", 42,42,2,13,13*5);
+        Spritesheet layerOne = AssetPool.getSpritesheet("assets/player/layerOne.png");
+        Spritesheet layerTwo = AssetPool.getSpritesheet("assets/player/layerTwo.png");
+        Spritesheet layerThree = AssetPool.getSpritesheet("assets/player/layerThree.png");
         Player playerComp = new Player(layerOne.sprites.get(0),layerTwo.sprites.get(0),layerThree.sprites.get(0), Color.RED, Color.GRAY);
         player.addComponent(playerComp);
 
@@ -41,9 +50,20 @@ public class LevelEditorScene extends Scene {
         ground = new GameObject("Ground",new Transform(new Vector2(0,Constants.GROUND_Y)));
         ground.addComponent(new Ground());
 
+        ground.setNonserializable();
+        player.setNonserializable();
+
         addGameObject(player);
         addGameObject(ground);
 
+    }
+
+    public void initAssetPool() {
+        AssetPool.addSpritesheet("assets/player/layerOne.png", 42,42,2,13,13*5);
+        AssetPool.addSpritesheet("assets/player/layerTwo.png", 42,42,2,13,13*5);
+        AssetPool.addSpritesheet("assets/player/layerThree.png", 42,42,2,13,13*5);
+        AssetPool.addSpritesheet("assets/groundSprites.png", Constants.TILE_WIDTH, Constants.TILE_HEIGHT, 2, 6, 12);
+        AssetPool.addSpritesheet("assets/ui/buttonSprites.png", 60, 60, 2, 2,2);
     }
 
     @Override
@@ -72,7 +92,37 @@ public class LevelEditorScene extends Scene {
         editingButtons.update(dt);
         mouseCursor.update(dt);
 
+        if(Window.getWindow().keyListener.isKeyPressed(KeyEvent.VK_F1)) {
+            export("Test");
+        }
+    }
 
+    private void export(String fileName) {
+        try {
+            FileOutputStream fos = new FileOutputStream("levels/" + fileName + ".zip");
+            ZipOutputStream zos = new ZipOutputStream(fos);
+
+            zos.putNextEntry(new ZipEntry(fileName + ".json"));
+
+            int i = 0;
+            for (GameObject go: gameObjects) {
+                String str = go.serialize(0);
+                if(str.compareTo("") != 0) {
+                    zos.write(str.getBytes());
+                    if(i != gameObjects.size()-1) {
+                        zos.write(",\n".getBytes());
+                    }
+                }
+                i++;
+            }
+            zos.closeEntry();
+            zos.close();
+            fos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 
     @Override

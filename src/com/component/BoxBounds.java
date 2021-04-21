@@ -21,4 +21,8 @@ public class BoxBounds extends Component {
         return new BoxBounds(width,height);
     }
 
+    @Override
+    public String serialize(int tabSize) {
+        return "";
+    }
 }

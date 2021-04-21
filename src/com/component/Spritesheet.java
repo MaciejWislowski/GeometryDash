@@ -25,7 +25,7 @@ public class Spritesheet {
                 int imgY = (row*tileHeight) + (row * spacing);
 
                 sprites.add(new Sprite(parent.image.getSubimage(imgX,imgY,tileWidth,tileHeight),
-                        row, column, count));
+                        row, column, count, pictureFile));
                 count++;
                 if(count > size - 1) {
                     break;
@@ -35,4 +35,6 @@ public class Spritesheet {
         }
 
     }
+
+
 }
