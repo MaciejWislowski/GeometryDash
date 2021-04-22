@@ -2,29 +2,36 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.15 - Deserialization p1
+- add classes: Parser
+- add utility functions which would be helpful after next update;
+
+- add classes: Serialize;
+- now we can save our created levels :)
+
 Update 0.14 - Serialization
-- add classess: Serialize;
+- add classes: Serialize;
 - now we can save our created levels :)
 
 Update 0.13 - Starting Level Editor UI
-- add classess: MainContainer and MenuItem;
+- add classes: MainContainer and MenuItem;
 - now we can choose which type of tile we can put :)
 
 Update 0.12 - Placing Blocks
-- add classess: SnapToGrid
+- add classes: SnapToGrid
 - now we can put new blocks in chosen grid tile :)
 
 Update 0.11 - Starting UI/Camera Controls
-- add classess: CameraControls and Grid;
+- add classes: CameraControls and Grid;
 - add visible grid;
 - add possibility to move in Level editor using mouse roll;
 
 Update 0.10 - Maintenance
-- add classess: LevelScene;
+- add classes: LevelScene;
 - code maintenance;
 
 Update 0.09 - Coding Gravity
-- add classess: Ground, RigidBody;
+- add classes: Ground, RigidBody;
 - add gravity;
 
 Update 0.08 - Camera and Rendering

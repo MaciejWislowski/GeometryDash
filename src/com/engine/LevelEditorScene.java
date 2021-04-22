@@ -3,6 +3,7 @@ package com.engine;
 import com.component.*;
 import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
+import com.file.Parser;
 import com.ui.MainContainer;
 import com.utility.Constants;
 import com.utility.Vector2;
@@ -56,6 +57,15 @@ public class LevelEditorScene extends Scene {
         addGameObject(player);
         addGameObject(ground);
 
+        Parser.openFile("Test");
+        System.out.println(Parser.parseInt());
+        System.out.println(Parser.parseInt());
+        System.out.println(Parser.parseDouble());
+        System.out.println(Parser.parseFloat());
+        System.out.println(Parser.parseBoolean());
+        System.out.println(Parser.parseBoolean());
+        System.out.println(Parser.parseString());
+        System.out.println(Parser.parseString());
     }
 
     public void initAssetPool() {

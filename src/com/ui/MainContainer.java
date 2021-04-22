@@ -17,6 +17,7 @@ public class MainContainer extends Component {
 
     public List<GameObject> menuItems;
 
+
     public MainContainer() {
         menuItems = new ArrayList<>();
         init();
@@ -31,10 +32,10 @@ public class MainContainer extends Component {
             int x = Constants.BUTTON_OFFSET_X + (currentSprite.column * Constants.BUTTON_WIDTH) + (currentSprite.column * Constants.BUTTON_SPACING_HZ);
             int y = Constants.BUTTON_OFFSET_Y + (currentSprite.row * Constants.BUTTON_HEIGHT) + (currentSprite.row * Constants.BUTTON_SPACING_VT);
 
-            GameObject obj = new GameObject("Generated", new Transform(new Vector2(x,y)));
+            GameObject obj = new GameObject("Generated" + i, new Transform(new Vector2(x,y)));
             obj.addComponent(currentSprite.copy());
 
-            MenuItem menuItem = new MenuItem(x,y,Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT, buttonSprites.sprites.get(0), buttonSprites.sprites.get(1));
+            MenuItem menuItem = new MenuItem(x,y,Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT, buttonSprites.sprites.get(0), buttonSprites.sprites.get(1), this);
             obj.addComponent(menuItem);
             menuItems.add(obj);
         }

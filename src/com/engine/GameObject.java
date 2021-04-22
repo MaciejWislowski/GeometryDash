@@ -11,8 +11,9 @@ import java.util.List;
 public class GameObject extends Serialize {
 
     private List<Component> components;
-    private String name;
+    public String name;
     private boolean serializable = true;
+    public boolean isSelected = false;
 
     public Transform transform;
 
@@ -47,6 +48,15 @@ public class GameObject extends Serialize {
     }
 
     public <T extends  Component> void removeComponent(Class<T> componentClass) {
+        for(Component c: components) {
+            if(componentClass.isAssignableFrom(c.getClass())){
+                components.remove(c);
+                return;
+            }
+        }
+    }
+
+    public <T extends  Component> void setIsSelected(Class<T> componentClass) {
         for(Component c: components) {
             if(componentClass.isAssignableFrom(c.getClass())){
                 components.remove(c);
