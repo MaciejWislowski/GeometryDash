@@ -1,5 +1,6 @@
 package com.file;
 
+import com.component.BoxBounds;
 import com.component.Sprite;
 import com.engine.Component;
 import com.engine.GameObject;
@@ -152,13 +153,17 @@ public class Parser {
 
     public static Component parseComponent() {
         String componentTitle = Parser.parseString();
+
+        skipWhitespace();
+        Parser.consume(':');
+        skipWhitespace();
+        Parser.consume('{');
+
         switch (componentTitle) {
             case "Sprite":
-                skipWhitespace();
-                Parser.consume(':');
-                skipWhitespace();
-                Parser.consume('{');
                 return Sprite.deserialize();
+            case "BoxBounds":
+                return BoxBounds.deserialize();
             default:
                 System.out.println("Could not find component '" + componentTitle + "' at line: " + Parser.line);
                 System.exit(-1);

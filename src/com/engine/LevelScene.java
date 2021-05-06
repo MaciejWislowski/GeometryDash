@@ -3,6 +3,7 @@ package com.engine;
 import com.component.*;
 import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
+import com.file.Parser;
 import com.utility.Constants;
 import com.utility.Vector2;
 
@@ -11,6 +12,7 @@ import java.awt.*;
 public class LevelScene extends Scene {
 
     public GameObject player;
+    public BoxBounds playerBounds;
 
     KL keyListener;
 
@@ -31,6 +33,8 @@ public class LevelScene extends Scene {
         player.addComponent(playerComp);
         player.addComponent(new Rigidbody(new Vector2(395,0)));
         player.addComponent(new BoxBounds(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT));
+        playerBounds = new BoxBounds(Constants.TILE_WIDTH,Constants.TILE_HEIGHT);
+        player.addComponent(playerBounds);
 
         GameObject ground;
         ground = new GameObject("Ground",new Transform(new Vector2(0,Constants.GROUND_Y)));
@@ -39,6 +43,8 @@ public class LevelScene extends Scene {
         addGameObject(player);
         addGameObject(ground);
 
+        importLevel("Test");
+
     }
 
     public void initAssetPool() {
@@ -46,6 +52,16 @@ public class LevelScene extends Scene {
         AssetPool.addSpritesheet("assets/player/layerTwo.png", 42,42,2,13,13*5);
         AssetPool.addSpritesheet("assets/player/layerThree.png", 42,42,2,13,13*5);
         AssetPool.addSpritesheet("assets/groundSprites.png", Constants.TILE_WIDTH, Constants.TILE_HEIGHT, 2, 6, 12);
+    }
+
+    private void importLevel(String filename) {
+        Parser.openFile(filename);
+
+        GameObject go = Parser.parseGameObject();
+        while (go != null) {
+            addGameObject(go);
+            go = Parser.parseGameObject();
+        }
     }
 
     @Override
@@ -64,6 +80,13 @@ public class LevelScene extends Scene {
 
         for(GameObject g: gameObjects) {
             g.update(dt);
+
+            Bounds b = g.getComponent(Bounds.class);
+            if(g != player && b != null) {
+                if(Bounds.checkCollision(playerBounds, b)) {
+                    System.out.println("Colliding!");
+                }
+            }
         }
 //        if(keyListener.isKeyPressed(KeyEvent.VK_Q)) player.transform.rotation += dt * 5f;
 //        if(keyListener.isKeyPressed(KeyEvent.VK_E)) player.transform.rotation += dt * -5f;

@@ -2,6 +2,10 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.17 - Collision Detection
+- add classes: Bounds
+- add collision detection;
+
 Update 0.16 - Deserialization p1
 - finished what started in previous update
 
