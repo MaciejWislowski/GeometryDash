@@ -1,5 +1,9 @@
 package com.file;
 
+import com.component.Sprite;
+import com.engine.Component;
+import com.engine.GameObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +31,16 @@ public class Parser {
         }
     }
 
+    public static GameObject parseGameObject() {
+        if(bytes.length == 0 || atEnd()) return null;
+
+        if(peek() == ',') Parser.consume(',');
+        skipWhitespace();
+        if(atEnd()) return null;
+
+        return GameObject.deserialize();
+    }
+
     public static void skipWhitespace() {
         while (!atEnd() && (peek() == ' ' || peek() == '\n' || peek() == '\t' || peek() == '\r')) {
             if(peek() == '\n') Parser.line++;
@@ -45,6 +59,7 @@ public class Parser {
     }
 
     public static void consume(char c) {
+        skipWhitespace();
         char actual = peek();
         if(actual != c) {
             System.out.println("Error: Expected '" + c + "' but instead we have got '" + actual + "' at line" + Parser.line);
@@ -83,8 +98,8 @@ public class Parser {
         return Double.parseDouble(builder.toString());
     }
 
-    public static double parseFloat() {
-        float f = (float) parseDouble();
+    public static float parseFloat() {
+        float f = (float)parseDouble();
         consume('f');
         return f;
     }
@@ -133,5 +148,78 @@ public class Parser {
 
     private static boolean isDigit(char c) {
         return c >= '0' && c <= '9';
+    }
+
+    public static Component parseComponent() {
+        String componentTitle = Parser.parseString();
+        switch (componentTitle) {
+            case "Sprite":
+                skipWhitespace();
+                Parser.consume(':');
+                skipWhitespace();
+                Parser.consume('{');
+                return Sprite.deserialize();
+            default:
+                System.out.println("Could not find component '" + componentTitle + "' at line: " + Parser.line);
+                System.exit(-1);
+        }
+        return null;
+    }
+
+    public static String consumeStringProperty(String name) {
+        skipWhitespace();
+        checkString(name);
+        consume(':');
+        return parseString();
+    }
+
+    public static int consumeIntProperty(String name) {
+        skipWhitespace();
+        checkString(name);
+        consume(':');
+        return parseInt();
+    }
+
+    public static double consumeDoubleProperty(String name) {
+        skipWhitespace();
+        checkString(name);
+        consume(':');
+        return parseDouble();
+    }
+
+    public static float consumeFloatProperty(String name) {
+        skipWhitespace();
+        checkString(name);
+        consume(':');
+        return parseFloat();
+    }
+
+    public static boolean consumeBooleanProperty(String name) {
+        skipWhitespace();
+        checkString(name);
+        consume(':');
+        return parseBoolean();
+    }
+
+    public static void consumeEndObjectProperty() {
+        skipWhitespace();
+        consume('}');
+    }
+
+    public static void consumeBeginObjectProperty(String name) {
+        skipWhitespace();
+        checkString(name);
+        skipWhitespace();
+        consume(':');
+        skipWhitespace();
+        consume('{');
+    }
+
+    private static void checkString(String str) {
+        String title = Parser.parseString();
+        if(title.compareTo(str) != 0 ) {
+            System.out.println("Expected '" + str + "instead got '" + title + "' at line: " + Parser.line);
+            System.exit(-1);
+        }
     }
 }

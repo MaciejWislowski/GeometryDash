@@ -13,11 +13,13 @@ public class AssetPool {
     static Map<String, Spritesheet> spritesheets = new HashMap<>();
 
     public static boolean hasSprite(String pictureFile) {
-        return AssetPool.sprites.containsKey(pictureFile);
+        File tmp = new File(pictureFile);
+        return AssetPool.sprites.containsKey(tmp.getAbsolutePath());
     }
 
     public static boolean hasSpriteSheet(String pictureFile) {
-        return AssetPool.spritesheets.containsKey(pictureFile);
+        File tmp = new File(pictureFile);
+        return AssetPool.spritesheets.containsKey(tmp.getAbsolutePath());
     }
 
     public static Sprite getSprite(String pictureFile) {

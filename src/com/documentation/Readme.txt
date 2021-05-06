@@ -2,6 +2,9 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.16 - Deserialization p1
+- finished what started in previous update
+
 Update 0.15 - Deserialization p1
 - add classes: Parser
 - add utility functions which would be helpful after next update;

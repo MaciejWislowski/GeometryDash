@@ -58,14 +58,6 @@ public class LevelEditorScene extends Scene {
         addGameObject(ground);
 
         Parser.openFile("Test");
-        System.out.println(Parser.parseInt());
-        System.out.println(Parser.parseInt());
-        System.out.println(Parser.parseDouble());
-        System.out.println(Parser.parseFloat());
-        System.out.println(Parser.parseBoolean());
-        System.out.println(Parser.parseBoolean());
-        System.out.println(Parser.parseString());
-        System.out.println(Parser.parseString());
     }
 
     public void initAssetPool() {
@@ -104,6 +96,18 @@ public class LevelEditorScene extends Scene {
 
         if(Window.getWindow().keyListener.isKeyPressed(KeyEvent.VK_F1)) {
             export("Test");
+        } else if(Window.getWindow().keyListener.isKeyPressed(KeyEvent.VK_F2)) {
+            importLevel("Test");
+        }
+    }
+
+    private void importLevel(String filename) {
+        Parser.openFile(filename);
+
+        GameObject go = Parser.parseGameObject();
+        while (go != null) {
+            addGameObject(go);
+            go = Parser.parseGameObject();
         }
     }
 
