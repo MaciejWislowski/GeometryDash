@@ -2,6 +2,9 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.18 - Collision Resolution
+- add collision resolution with sides and top of blocks;
+
 Update 0.17 - Collision Detection
 - add classes: Bounds
 - add collision detection;

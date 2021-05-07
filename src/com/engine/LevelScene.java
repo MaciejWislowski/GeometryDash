@@ -40,7 +40,7 @@ public class LevelScene extends Scene {
         ground = new GameObject("Ground",new Transform(new Vector2(0,Constants.GROUND_Y)));
         ground.addComponent(new Ground());
 
-        addGameObject(player);
+        renderer.submit(player);
         addGameObject(ground);
 
         importLevel("Test");
@@ -78,13 +78,15 @@ public class LevelScene extends Scene {
             camera.position.y = Constants.CAMERA_OFFSET_GROUND_Y;
         }
 
+        player.update(dt);
+        player.getComponent(Player.class).onGround = false;
         for(GameObject g: gameObjects) {
             g.update(dt);
 
             Bounds b = g.getComponent(Bounds.class);
-            if(g != player && b != null) {
+            if(b != null) {
                 if(Bounds.checkCollision(playerBounds, b)) {
-                    System.out.println("Colliding!");
+                    Bounds.resolveCollision(b, player);
                 }
             }
         }

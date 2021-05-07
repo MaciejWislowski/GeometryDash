@@ -16,8 +16,11 @@ public class Ground extends Component {
 
             LevelScene scene = (LevelScene) Window.getWindow().getCurrentScene();
             GameObject player = scene.player;
+
             if (player.transform.position.y + player.getComponent(BoxBounds.class).height > gameObject.transform.position.y) {
                 player.transform.position.y = gameObject.transform.position.y - player.getComponent(BoxBounds.class).height;
+
+                player.getComponent(Player.class).onGround = true;
             }
             gameObject.transform.position.x = scene.camera.position.x;
         } else {
