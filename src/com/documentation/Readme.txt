@@ -2,6 +2,10 @@ Project name: Geometry Dash
 
 Inspiration: GamesWithGabe - Coding Geometry Dash in Java
 
+Update 0.19 - Parallax Backgrounds
+- add classes: ParallaxBackground
+- added moving background;
+
 Update 0.18 - Collision Resolution
 - add collision resolution with sides and top of blocks;
 

@@ -14,6 +14,7 @@ public class GameObject extends Serialize {
     private List<Component> components;
     public String name;
     private boolean serializable = true;
+    public boolean isUI = false;
     public boolean isSelected = false;
 
     public Transform transform;
@@ -160,5 +161,10 @@ public class GameObject extends Serialize {
         }
         Parser.consumeEndObjectProperty();
         return go;
+    }
+
+    public void setUI(boolean val) {
+        this.isUI = val;
+
     }
 }
